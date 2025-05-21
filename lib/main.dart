@@ -15,17 +15,63 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: const Color.fromARGB(255, 243, 242, 241),
       ),
-      home: const MyHomePage(title: ''),
+      home: const MyHomePage(),
+      // home: const LogInPage(title: ''),
       // home: const CallbackFunctionPage(),
     );
   }
 }
 
-class CallbackFunctionPage extends StatefulWidget {
-  const CallbackFunctionPage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  State<CallbackFunctionPage> createState() => _CallbackFunctionPageState();
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Flutter Widgets"),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
+      body: const FirstScreen(),
+    );
+  }
+}
+
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: [
+          ElevatedButton(
+            onPressed:
+                () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CallbackFunctionPage(),
+                  ),
+                ),
+            child: Text("Callback Function Page"),
+          ),
+          ElevatedButton(
+            onPressed:
+                () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => LogInPage(title: '')),
+                ),
+            child: Text("Login Page"),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 // Callback function page
@@ -34,6 +80,13 @@ to add vibration haptic on button press
 to create 3d effect on button press
 
 */
+class CallbackFunctionPage extends StatefulWidget {
+  const CallbackFunctionPage({super.key});
+
+  @override
+  State<CallbackFunctionPage> createState() => _CallbackFunctionPageState();
+}
+
 class _CallbackFunctionPageState extends State<CallbackFunctionPage> {
   double elevationValue = 0.0;
   String buttonText = "Click Me";
@@ -99,15 +152,15 @@ class _CallbackFunctionPageState extends State<CallbackFunctionPage> {
 
 // login page
 
-class MyHomePage extends StatefulWidget {
+class LogInPage extends StatefulWidget {
   final String title;
-  const MyHomePage({super.key, required this.title});
+  const LogInPage({super.key, required this.title});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LogInPageState extends State<LogInPage> {
   var emailText = TextEditingController();
   var passText = TextEditingController();
   bool _obscurePassword = true; //  add this to toggle visibility
@@ -115,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('...page...')),
+      appBar: AppBar(title: Text('Log In page')),
       body: Center(
         child: Container(
           width: 300,
